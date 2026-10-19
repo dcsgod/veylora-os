@@ -1,0 +1,23 @@
+{
+  "name": "veylora-os",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Veylora OS - from intent to working systems.",
+  "workspaces": [
+    "packages/*",
+    "apps/frontend",
+    "apps/desktop"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @veylora/desktop",
+    "dev:frontend": "npm run dev --workspace @veylora/frontend",
+    "build": "npm run build --workspace @veylora/frontend && npm run build --workspace @veylora/desktop",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test:frontend": "npm run test --workspace @veylora/frontend",
+    "dist:win": "npm run build && npm run dist:win --workspace @veylora/desktop",
+    "dist:mac": "npm run build && npm run dist:mac --workspace @veylora/desktop"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

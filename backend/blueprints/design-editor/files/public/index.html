@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design editor</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="toolbar">
+    <input id="doc-name" class="doc-name" aria-label="Design name">
+    <span id="dirty" class="dirty" hidden>Unsaved</span>
+    <div class="group" role="toolbar" aria-label="Tools">
+      <button data-tool="select" class="active" title="Select (V)">Select</button>
+      <button data-tool="rect" title="Rectangle (R)">Rectangle</button>
+      <button data-tool="ellipse" title="Ellipse (O)">Ellipse</button>
+      <button data-tool="text" title="Text (T)">Text</button>
+      <button data-tool="line" title="Line (L)">Line</button>
+      <label class="button" title="Insert image">Image<input id="image-input" type="file" accept="image/png,image/jpeg,image/gif,image/webp" hidden></label>
+    </div>
+    <div class="group">
+      <button id="undo" title="Undo (Ctrl+Z)">Undo</button>
+      <button id="redo" title="Redo (Ctrl+Shift+Z)">Redo</button>
+      <button id="duplicate" title="Duplicate (Ctrl+D)">Duplicate</button>
+      <button id="delete" title="Delete (Del)">Delete</button>
+    </div>
+    <div class="group" aria-label="Align">
+      <button data-align="left" title="Align left">⟸</button>
+      <button data-align="center" title="Align centre">↔</button>
+      <button data-align="right" title="Align right">⟹</button>
+      <button data-align="top" title="Align top">⇑</button>
+      <button data-align="middle" title="Align middle">↕</button>
+      <button data-align="bottom" title="Align bottom">⇓</button>
+    </div>
+    <div class="group right">
+      <select id="template-select" aria-label="New from template"><option value="">New from template…</option></select>
+      <select id="open-select" aria-label="Open saved design"><option value="">Open…</option></select>
+      <button id="save" title="Save (Ctrl+S)">Save</button>
+      <label class="button" title="Import design JSON">Import<input id="import-input" type="file" accept="application/json,.json" hidden></label>
+      <button id="export-json">JSON</button>
+      <button id="export-svg">SVG</button>
+      <button id="export-png">PNG</button>
+    </div>
+  </header>
+  <div class="workspace">
+    <aside class="panel left">
+      <h2>Layers</h2>
+      <ol id="layers" class="layers"></ol>
+    </aside>
+    <main id="stage" class="stage">
+      <svg id="canvas" xmlns="http://www.w3.org/2000/svg" tabindex="0" aria-label="Design canvas">
+        <rect id="bg" x="0" y="0"></rect>
+        <g id="content"></g>
+        <g id="guides"></g>
+        <g id="overlay"></g>
+      </svg>
+      <div class="zoom">
+        <button id="zoom-out" aria-label="Zoom out">−</button>
+        <span id="zoom-level">100%</span>
+        <button id="zoom-in" aria-label="Zoom in">+</button>
+        <button id="zoom-fit">Fit</button>
+      </div>
+    </main>
+    <aside class="panel right">
+      <h2 id="props-title">Document</h2>
+      <form id="props" class="props" autocomplete="off"></form>
+      <div id="status" class="status" role="status"></div>
+    </aside>
+  </div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

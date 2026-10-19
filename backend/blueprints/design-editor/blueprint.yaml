@@ -1,0 +1,23 @@
+name: design-editor
+title: Layered design editor
+description: Dependency-free browser design editor with shapes, text, images, layers, selection, move/resize with snapping, alignment, undo/redo, templates, save/load and SVG/PNG/JSON export.
+runtime: node
+start: [server.mjs]
+components:
+  scaffold:
+    files: [package.json, server.mjs, .gitignore]
+  model:
+    files: [src/model.mjs]
+  history:
+    files: [src/history.mjs]
+  serialize:
+    files: [src/serialize.mjs, src/store.mjs]
+  export:
+    files: [src/export.mjs, src/templates.mjs]
+  ui:
+    files: [public/index.html, public/app.js, public/styles.css]
+  tests:
+    files: [test/model.test.mjs, test/history.test.mjs, test/serialize.test.mjs, test/export.test.mjs, test/api.test.mjs]
+  docs:
+    files: [README.md]
+browser_checks: design_editor

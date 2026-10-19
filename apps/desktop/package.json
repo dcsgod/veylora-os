@@ -1,0 +1,24 @@
+{
+  "name": "@veylora/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Veylora OS desktop shell",
+  "author": "Veylora OS contributors",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "typecheck": "tsc --noEmit -p .",
+    "dev": "tsc -p . && electron . --dev",
+    "start": "electron .",
+    "dist:win": "electron-builder --win --config electron-builder.yml",
+    "dist:mac": "electron-builder --mac --config electron-builder.yml",
+    "dist:dir": "electron-builder --dir --config electron-builder.yml"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@veylora/contracts": "0.1.0",
+    "electron": "44.9.0",
+    "electron-builder": "26.15.3",
+    "typescript": "5.9.3"
+  }
+}

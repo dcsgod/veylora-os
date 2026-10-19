@@ -1,0 +1,11 @@
+name: web-app
+title: Generic web application
+description: Minimal dependency-free Node.js web application (static UI, JSON API, file persistence, tests) used as the base for model-generated features.
+runtime: node
+start: [server.mjs]
+components:
+  scaffold:
+    files: [package.json, server.mjs, .gitignore, src/http.mjs, src/store.mjs, public/index.html, public/app.js, public/styles.css, public/features.js, test/server.test.mjs]
+  docs:
+    files: [README.md]
+browser_checks: generic

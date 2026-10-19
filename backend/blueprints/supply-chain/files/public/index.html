@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supply-chain planner</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">Supply-chain planner</div>
+    <div id="synthetic-badge" class="badge" hidden>Synthetic data</div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="inventory" class="active">Inventory</button>
+      <button role="tab" data-tab="forecast">Forecast</button>
+      <button role="tab" data-tab="replenishment">Replenishment</button>
+      <button role="tab" data-tab="warehouses">Warehouses</button>
+      <button role="tab" data-tab="suppliers">Suppliers</button>
+      <button role="tab" data-tab="scenarios">Scenarios</button>
+    </nav>
+  </header>
+
+  <section id="summary" class="summary"></section>
+
+  <main>
+    <section data-panel="inventory" class="panel active">
+      <div class="panel-head">
+        <h2>Inventory by location</h2>
+        <form id="ingest-form" class="inline">
+          <select name="kind" aria-label="Record kind">
+            <option value="inventory">inventory</option>
+            <option value="product">product</option>
+            <option value="supplier">supplier</option>
+            <option value="location">location</option>
+            <option value="order">order</option>
+          </select>
+          <input type="file" name="file" accept=".csv,text/csv" aria-label="CSV file">
+          <button type="submit">Import CSV</button>
+        </form>
+      </div>
+      <div id="ingest-result" class="note"></div>
+      <table id="inventory-table"><thead><tr>
+        <th>SKU</th><th>Product</th><th>Location</th><th class="num">On hand</th><th class="num">On order</th>
+      </tr></thead><tbody></tbody></table>
+    </section>
+
+    <section data-panel="forecast" class="panel">
+      <div class="panel-head">
+        <h2>Demand forecast</h2>
+        <form id="forecast-form" class="inline">
+          <select name="sku" id="forecast-sku" aria-label="SKU"></select>
+          <select name="method" aria-label="Method">
+            <option value="exponential_smoothing">Exponential smoothing</option>
+            <option value="moving_average">Moving average</option>
+            <option value="holt">Holt linear</option>
+          </select>
+          <input name="horizon" type="number" min="1" max="52" value="8" aria-label="Horizon (weeks)">
+          <button type="submit">Run</button>
+        </form>
+      </div>
+      <svg id="forecast-chart" viewBox="0 0 800 260" preserveAspectRatio="none" role="img" aria-label="Demand history and forecast"></svg>
+      <table id="backtest-table"><thead><tr><th>Method</th><th class="num">MAE</th><th class="num">MAPE %</th></tr></thead><tbody></tbody></table>
+      <p id="forecast-note" class="note"></p>
+    </section>
+
+    <section data-panel="replenishment" class="panel">
+      <div class="panel-head">
+        <h2>Replenishment recommendations</h2>
+        <form id="replenishment-form" class="inline">
+          <label>Service level <input name="serviceLevel" type="number" step="0.01" min="0.51" max="0.99" value="0.95"></label>
+          <button type="submit">Recalculate</button>
+        </form>
+      </div>
+      <table id="replenishment-table"><thead><tr>
+        <th>SKU</th><th>Location</th><th class="num">Position</th><th class="num">Safety</th><th class="num">ROP</th>
+        <th class="num">Order qty</th><th class="num">Value</th><th>Urgency</th><th>Reason</th>
+      </tr></thead><tbody></tbody></table>
+    </section>
+
+    <section data-panel="warehouses" class="panel">
+      <h2>Warehouse capacity</h2>
+      <div id="capacity-list" class="capacity"></div>
+    </section>
+
+    <section data-panel="suppliers" class="panel">
+      <div class="panel-head">
+        <h2>Suppliers</h2>
+      </div>
+      <table id="suppliers-table"><thead><tr>
+        <th>ID</th><th>Name</th><th class="num">Lead time (days)</th><th class="num">MOQ</th><th class="num">Reliability</th>
+      </tr></thead><tbody></tbody></table>
+      <form id="supplier-form" class="grid-form">
+        <h3>Add or update supplier</h3>
+        <input name="id" placeholder="ID" required>
+        <input name="name" placeholder="Name" required>
+        <input name="leadTimeDays" type="number" min="0" placeholder="Lead time days" required>
+        <input name="minOrderQty" type="number" min="0" placeholder="Min order qty" required>
+        <input name="reliability" type="number" min="0" max="1" step="0.01" placeholder="Reliability 0-1" required>
+        <button type="submit">Save supplier</button>
+        <div id="supplier-result" class="note"></div>
+      </form>
+    </section>
+
+    <section data-panel="scenarios" class="panel">
+      <h2>What-if scenarios</h2>
+      <form id="scenario-form" class="grid-form">
+        <input name="name" placeholder="Scenario name" value="Demand surge">
+        <label>Demand multiplier <input name="demandMultiplier" type="number" step="0.05" min="0" max="10" value="1.3"></label>
+        <label>Lead-time change (days) <input name="leadTimeDeltaDays" type="number" min="-60" max="365" value="0"></label>
+        <label>Service level <input name="serviceLevel" type="number" step="0.01" min="0.51" max="0.99" value="0.95"></label>
+        <label>Disrupted supplier <select name="disruptedSupplierId" id="scenario-supplier"><option value="">None</option></select></label>
+        <button type="submit">Run scenario</button>
+      </form>
+      <div id="scenario-result"></div>
+      <h3>Saved scenarios</h3>
+      <table id="scenarios-table"><thead><tr>
+        <th>Name</th><th>Created</th><th class="num">Baseline value</th><th class="num">Scenario value</th><th class="num">High urgency</th>
+      </tr></thead><tbody></tbody></table>
+    </section>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

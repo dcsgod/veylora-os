@@ -1,0 +1,4 @@
+sku,locationId,onHand,onOrder
+SKU-1001,WH-EAST,1200,0
+SKU-2001,WH-WEST,14,20
+SKU-3001,WH-CENTRAL,-5,0

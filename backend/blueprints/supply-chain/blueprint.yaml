@@ -1,0 +1,25 @@
+name: supply-chain
+title: Supply-chain planning application
+description: Dependency-free Node.js application with inventory visibility, baseline demand forecasting, replenishment recommendations, warehouse capacity, supplier management and what-if scenarios.
+runtime: node
+start: [server.mjs]
+components:
+  scaffold:
+    files: [package.json, server.mjs, .gitignore]
+  domain:
+    files: [src/domain.mjs]
+  data:
+    files: [src/data.mjs, src/ingest.mjs, fixtures/products.csv, fixtures/inventory.csv]
+  algorithms:
+    files: [src/forecast.mjs, src/replenishment.mjs, src/capacity.mjs]
+  scenarios:
+    files: [src/scenario.mjs]
+  api:
+    files: [src/http.mjs, src/store.mjs, src/api.mjs]
+  ui:
+    files: [public/index.html, public/app.js, public/styles.css]
+  tests:
+    files: [test/domain.test.mjs, test/ingest.test.mjs, test/forecast.test.mjs, test/replenishment.test.mjs, test/capacity.test.mjs, test/scenario.test.mjs, test/api.test.mjs]
+  docs:
+    files: [README.md]
+browser_checks: supply_chain

@@ -1,0 +1,4 @@
+sku,name,category,unitCost,unitVolume,supplierId
+SKU-9001,Rubber gasket,Components,1.2,0.0004,SUP-B
+SKU-9002,"Cable, shielded 2m",Electronics,4.75,0.0008,SUP-C
+SKU-9003,Pallet,Packaging,not-a-number,0.5,SUP-D

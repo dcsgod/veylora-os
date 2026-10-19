@@ -1,0 +1,50 @@
+:root {
+  --bg: #eceef1; --surface: #ffffff; --border: #d9dde3; --text: #1d2228; --muted: #5d6773; --accent: #2f6fdb;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px; color: var(--text); background: var(--bg);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #121417; --surface: #1c1f24; --border: #2c3138; --text: #e5e8eb; --muted: #9aa3ad; --accent: #5b8ef0; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body { display: flex; flex-direction: column; }
+.toolbar { display: flex; align-items: center; gap: 12px; padding: 6px 12px; background: var(--surface); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.group { display: flex; gap: 2px; }
+.group.right { margin-left: auto; }
+.doc-name { width: 200px; font-weight: 600; border-color: transparent; }
+.doc-name:hover, .doc-name:focus { border-color: var(--border); }
+.dirty { color: var(--muted); font-size: 11px; }
+button, .button, input, select, textarea { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; }
+button, .button { cursor: pointer; }
+button:hover:not(:disabled), .button:hover { border-color: var(--muted); }
+button:disabled { opacity: 0.45; cursor: default; }
+button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.workspace { flex: 1; display: grid; grid-template-columns: 220px 1fr 260px; min-height: 0; }
+.panel { background: var(--surface); padding: 12px; overflow: auto; }
+.panel.left { border-right: 1px solid var(--border); }
+.panel.right { border-left: 1px solid var(--border); }
+h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 8px; font-weight: 600; }
+.layers { list-style: none; margin: 0; padding: 0; }
+.layers li { display: grid; grid-template-columns: 1fr auto; gap: 2px 6px; padding: 6px; border-radius: 4px; cursor: pointer; }
+.layers li:hover { background: var(--bg); }
+.layers li.selected { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.layer-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.layer-type { color: var(--muted); font-size: 11px; }
+.layer-actions { grid-column: 1 / -1; display: flex; gap: 2px; }
+.layer-actions button { padding: 0 6px; font-size: 11px; }
+.stage { position: relative; overflow: auto; display: grid; place-items: center; padding: 32px; }
+#canvas { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.18); outline: none; touch-action: none; }
+#canvas.drawing { cursor: crosshair; }
+.sel-box { fill: none; stroke: var(--accent); pointer-events: none; }
+.handle { fill: #fff; stroke: var(--accent); cursor: nwse-resize; }
+.handle-ne, .handle-sw { cursor: nesw-resize; }
+.guide { stroke: #e0457b; pointer-events: none; }
+.zoom { position: sticky; bottom: 0; justify-self: end; display: flex; gap: 4px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; margin-top: 12px; }
+.props { display: grid; gap: 8px; }
+.props label { display: grid; gap: 3px; color: var(--muted); font-size: 11px; }
+.props input, .props select, .props textarea { width: 100%; color: var(--text); }
+.props textarea { min-height: 64px; resize: vertical; }
+.props input[type=color] { padding: 0; height: 28px; }
+.status { margin-top: 12px; color: var(--muted); font-size: 12px; }
+.status.error { color: #c0392b; }

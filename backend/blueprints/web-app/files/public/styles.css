@@ -1,0 +1,9 @@
+:root { font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif; font-size: 14px; color: #1d2228; background: #f6f7f9; }
+body { margin: 0; }
+.top { height: 48px; display: flex; align-items: center; padding: 0 24px; background: #fff; border-bottom: 1px solid #dde1e6; }
+main { padding: 24px; display: grid; gap: 16px; }
+.card { background: #fff; border: 1px solid #dde1e6; border-radius: 6px; padding: 16px; }
+.row { display: flex; gap: 8px; }
+input, button { font: inherit; padding: 5px 8px; border: 1px solid #dde1e6; border-radius: 4px; }
+button { cursor: pointer; }
+h2 { font-size: 15px; margin: 0 0 12px; }
